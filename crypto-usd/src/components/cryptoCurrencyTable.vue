@@ -1,8 +1,18 @@
 <template>
     <div>
+
+        <input
+        type="text"
+        class="form-control text-light bg-dark rounded-0 border-0 my-4"
+        placeholder="Search"
+        v-model="textSearch"
+        @keyup="searchCoin()"
+        autofocus
+      />
+
         <table>
         <thead>
-          <tr class="table-header">
+          <tr class="text-light bg-dark rounded-0 border-0 my-4">
             <th v-for="(title, index) in titles" :key="index">
               {{ title }}
             </th>
@@ -55,7 +65,17 @@ export default {
     this.coins = data;
     this.filteredCoins = data;
   },
+     methods: {
+       searchCoin() {
+         this.filteredCoins = this.coins.filter(
+           (coin) =>
+             coin.name.toLowerCase().includes(this.textSearch.toLowerCase()) ||
+             coin.symbol.toLowerCase().includes(this.textSearch.toLowerCase())
+         );
+       },
+     },
 }
+
 
   
 </script>
@@ -66,6 +86,7 @@ div{
     margin-top: 10px;
     padding-top: 10px;
     display: flex;
+    flex-direction: column;
     width: 90%;
     background-color: rgb(42, 41, 41);
     border-radius: 10px;
