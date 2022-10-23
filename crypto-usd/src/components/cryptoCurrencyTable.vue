@@ -1,8 +1,8 @@
 <template>
     <div>
-        <table class="table table-hover table-dark text-light">
+        <table>
         <thead>
-          <tr>
+          <tr class="table-header">
             <th v-for="(title, index) in titles" :key="index">
               {{ title }}
             </th>
@@ -47,30 +47,49 @@ export default {
       textSearch: "",
     };
   },
+  async mounted() {
+    const res = await fetch(
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
+    );
+    const data = await res.json();
+    this.coins = data;
+    this.filteredCoins = data;
+  },
 }
+
   
 </script>
 
 <style lang="css">
 div{
-    display: flex;
+    margin: auto;
+    margin-top: 10px;
     padding-top: 10px;
-    width: 100%;
+    display: flex;
+    width: 90%;
+    background-color: rgb(42, 41, 41);
+    border-radius: 10px;
 }
 table{
     width: 90%;
     margin: auto;
+    border: none;
+    color: rgb(230, 234, 238);
+}
+
+
+thead {
+    width: 100%;
+}
+
+tbody{
+    width: 100%;
 }
 
 tr{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    background-color: rgb(37, 36, 36);
-    border-radius: 20px;
+    text-align: left;
 }
-th{
-    color: aliceblue;
-}
+
+
 
 </style>
