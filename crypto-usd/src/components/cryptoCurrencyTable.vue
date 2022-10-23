@@ -1,112 +1,56 @@
 <template>
-    <v-data-table
-      :headers="headers"
-      :items="desserts"
-      :items-per-page="5"
-      class="elevation-1"
-    ></v-data-table>
-  </template>
+    <div>
+        <table class="table table-hover table-dark text-light">
+        <thead>
+          <tr>
+            <th v-for="(title, index) in titles" :key="index">
+              {{ title }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(coin, index) in filteredCoins" :key="coin.id">
+            <td class="text-muted">{{ index }}</td>
+            <td>
+              <img :src="coin.image" :alt="coin.name" style="width: 2rem" class="me-2" />
+              <span>
+                {{ coin.name }}
+              </span>
+              <span class="ms-2 text-muted text-uppercase">
+                {{ coin.symbol }}
+              </span>
+            </td>
+            <td>{{ coin.current_price.toLocaleString() }}</td>
+            <td
+              :class="[
+                coin.price_change_percentage_24h > 0
+                  ? 'text-success'
+                  : 'text-danger',
+              ]"
+            >
+              {{ coin.price_change_percentage_24h }}
+            </td>
+            <td>{{ coin.total_volume.toLocaleString() }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</template>
 
 <script>
-  export default {
-    data () {
-      return {
-        headers: [
-          {
-            text: 'name',
-            align: 'start',
-            sortable: false,
-            value: 'name',
-          },
-          { text: 'Prix', value: 'prix' }
-         
-        ],
-        desserts: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%',
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%',
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%',
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%',
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%',
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%',
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: '2%',
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: '45%',
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: '22%',
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6%',
-          },
-        ],
-      }
-    },
-  }
+export default {
+  data() {
+    return {
+      coins: [],
+      filteredCoins: [],
+      titles: ["#", "Coin", "Price", "Price Change", "24h Volume"],
+      textSearch: "",
+    };
+  },
+}
+  
 </script>
 
 <style>
+
 </style>
