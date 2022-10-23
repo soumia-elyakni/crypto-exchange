@@ -51,6 +51,26 @@ export default {
   
 </script>
 
-<style>
+<style lang="css">
+div{
+    display: flex;
+    padding-top: 10px;
+    width: 100%;
+}
+table{
+    width: 90%;
+    margin: auto;
+}
+
+tr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: rgb(37, 36, 36);
+    border-radius: 20px;
+}
+th{
+    color: aliceblue;
+}
 
 </style>
