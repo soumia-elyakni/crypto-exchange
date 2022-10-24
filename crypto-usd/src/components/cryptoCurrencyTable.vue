@@ -18,7 +18,7 @@
             </thead>
             <tbody>
                 <tr v-for="( coin, index) in filteredCoins" :key="coin.id" class="mb-3">
-                    <td class="text-muted">{{ index +1 }}
+                    <td class="text-muted">{{ index + 1 }}
                         <hr class="w-100">
                     </td>
                     <td>
@@ -35,9 +35,9 @@
                         <hr class="w-100">
                     </td>
                     <td :class="[
-                      coin.price_change_percentage_24h > 0
-                        ?'text-success'
-                        :'text-danger',
+                        coin.price_change_percentage_24h > 0
+                            ? 'text-success'
+                            : 'text-danger',
                     ]">
                         {{ coin.price_change_percentage_24h }}
                         <hr class="w-100 text-light">
@@ -49,14 +49,6 @@
                 </tr>
             </tbody>
         </table>
-        <p class="text-light">
-        debug: sort={{currentSort}}
-        </p>
-
-        <p class="d-flex flex-row justify-content-evenly w-100 m-auto float-end text-white fw-bold pb-3">
-            <button @click="prevPage">Previous</button>
-            <button @click="nextPage">Next</button>
-        </p>
     </div>
 </template>
 
@@ -73,7 +65,7 @@ export default {
     data() {
         return {
             coins: [],
-            filteredCoins : this.filteredCoins,
+            filteredCoins: this.filteredCoins,
             titles: ["#", "Coin", "Price", "Price Change", "24h Volume"],
             textSearch: "",
         };
@@ -86,30 +78,22 @@ export default {
                     coin.symbol.toLowerCase().includes(this.textSearch.toLowerCase())
             );
         },
-        sort:function(s) {
-      //if s == current sort, reverse
-       if(s === this.currentSort) {
-        this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
-      }
-      this.currentSort = s;
-    }
-        
+        sort: function (s) {
+            if (s != 'Coin') {
+                if (s === this.currentSort) {
+                    this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc';
+                }
+                this.currentSort = s;
+                // return Arrayso;
+            }
 
-        // nextPage: function () {
-        //     if ((this.currentPage * this.pageSize) < this.coins.length) this.currentPage++;
-        // },
-        // prevPage: function () {
-        //     if (this.currentPage > 1) this.currentPage--;
-        // }
-    },
-    computed : {
-        filteredCoin: function() {
-     let filter = new RegExp(this.titles, 'i')
-     return this.filteredCoins.filter(el => el.title.match(filter))
-    }
-  }
+        }
 
+
+    }
 }
+
+
 
 
 
